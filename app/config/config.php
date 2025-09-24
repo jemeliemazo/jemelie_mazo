@@ -64,7 +64,7 @@ $config['VERSION']                 = '4.2.4';
 | -------------------------------------------------------------------
 | Values: development and production
 */
-$config['ENVIRONMENT']             = 'development';
+$config['ENVIRONMENT']             = 'production';
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +79,7 @@ $config['ENVIRONMENT']             = 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= 'http://localhost:3000/';
+$config['base_url'] 				= ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +90,7 @@ $config['base_url'] 				= 'http://localhost:3000/';
 | variable to blank.
 |
 */
-$config['index_page']               = 'index.php';
+$config['index_page']               = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -212,7 +212,7 @@ $config['language'] 				= 'en-US';
 $config['sess_driver']             = 'file';
 $config['sess_cookie_name']        = 'LLSession';
 $config['sess_expiration']         = 7200;
-$config['sess_save_path']          = '';
+$config['sess_save_path']          = '/tmp';
 $config['sess_match_ip']           = TRUE;
 $config['sess_match_fingerprint']  = TRUE;
 $config['sess_time_to_update']     = 300;
