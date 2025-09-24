@@ -11,8 +11,9 @@
 
   <!-- Navbar -->
   <nav class="bg-gradient-to-r from-gray-800 to-gray-700 shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-4">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="#" class="text-white font-semibold text-xl tracking-wide">🔧 User Management</a>
+      <a href="<?=site_url('logout')?>" class="text-red-400 hover:underline">Logout</a>
     </div>
   </nav>
 
@@ -22,6 +23,14 @@
       <!-- Header -->
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-semibold text-white">🧑‍🤝‍🧑 User Directory</h1>
+      </div>
+
+      <!-- Search -->
+      <div class="mb-6">
+        <form method="get" class="flex">
+          <input type="text" name="search" value="<?=$search?>" placeholder="Search by name or email" class="flex-1 px-3 py-2 bg-gray-700 text-white rounded-l">
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r">Search</button>
+        </form>
       </div>
 
       <!-- Table -->
@@ -58,6 +67,23 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="mt-6 flex justify-center">
+        <?php if ($pagination['last_page'] > 1): ?>
+          <div class="flex space-x-2">
+            <?php if ($page > 1): ?>
+              <a href="?page=<?=($page - 1)?>&search=<?=$search?>" class="px-3 py-2 bg-gray-700 text-white rounded hover:bg-gray-600">Previous</a>
+            <?php endif; ?>
+            <?php for ($i = 1; $i <= $pagination['last_page']; $i++): ?>
+              <a href="?page=<?=$i?>&search=<?=$search?>" class="px-3 py-2 <?=($i == $page ? 'bg-blue-600' : 'bg-gray-700')?> text-white rounded hover:bg-gray-600"><?=$i?></a>
+            <?php endfor; ?>
+            <?php if ($page < $pagination['last_page']): ?>
+              <a href="?page=<?=($page + 1)?>&search=<?=$search?>" class="px-3 py-2 bg-gray-700 text-white rounded hover:bg-gray-600">Next</a>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
       </div>
 
       <!-- Button -->

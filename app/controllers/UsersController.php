@@ -14,14 +14,41 @@ class UsersController extends Controller {
 
     public function index()
     {
+        if (!$this->session->userdata('logged_in')) {
+            redirect(site_url('login'));
+        }
+
         $this->call->model('UsersModel');
         $this->UsersModel->db->raw("CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT, last_name TEXT, email TEXT)");
-        $data['users'] = $this->UsersModel-> All();
+
+        $search = $this->io->get('search') ?: '';
+        $page = $this->io->get('page') ?: 1;
+        $per_page = 5;
+
+        $conditions = [];
+        if (!empty($search)) {
+            $conditions = [
+                'first_name LIKE' => '%' . $search . '%',
+                'OR last_name LIKE' => '%' . $search . '%',
+                'OR email LIKE' => '%' . $search . '%'
+            ];
+        }
+
+        $pagination = $this->UsersModel->paginate($per_page, $page, $conditions);
+
+        $data['users'] = $pagination['data'];
+        $data['pagination'] = $pagination;
+        $data['search'] = $search;
+        $data['page'] = $page;
 
         $this->call->view('users/index', $data);
     }
 
     function create(){
+        if (!$this->session->userdata('logged_in')) {
+            redirect(site_url('login'));
+        }
+
         if($this->io->method() == 'post'){
             $first_name = $this->io->post('first_name');
             $last_name = $this->io->post('last_name');
@@ -45,6 +72,10 @@ class UsersController extends Controller {
     }
 
     function update($id){
+        if (!$this->session->userdata('logged_in')) {
+            redirect(site_url('login'));
+        }
+
         $user = $this->UsersModel->find($id);
         if(!$user){
             echo "User not found.";
@@ -72,8 +103,12 @@ class UsersController extends Controller {
             $this->call->view('users/update', $data);
         }
     }
-    
+
     function delete($id){
+        if (!$this->session->userdata('logged_in')) {
+            redirect(site_url('login'));
+        }
+
         if($this->UsersModel->delete($id)){
             redirect();
         }else{

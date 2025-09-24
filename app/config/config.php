@@ -291,7 +291,7 @@ $config['soft_delete_column']       = 'deleted_at';
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
 */
-$config['csrf_protection']         = FALSE;
+$config['csrf_protection']         = TRUE;
 $config['csrf_exclude_uris']       = array();
 $config['csrf_token_name']         = 'csrf_test_name';
 $config['csrf_cookie_name']        = 'csrf_cookie_name';

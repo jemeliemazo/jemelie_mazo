@@ -12,6 +12,7 @@
     <h2 class="text-2xl font-semibold text-center text-cyan-400 mb-6">📝 Update Record</h2>
 
     <form action="<?=site_url('users/update/'.$user['id'])?>" method="POST" class="space-y-4">
+      <?=csrf_field()?>
       <!-- First Name -->
       <div>
         <label class="block text-gray-300 mb-1">First Name</label>
