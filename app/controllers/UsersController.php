@@ -15,6 +15,7 @@ class UsersController extends Controller {
     public function index()
     {
         $this->call->model('UsersModel');
+        $this->UsersModel->db->raw("CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT, last_name TEXT, email TEXT)");
         $data['users'] = $this->UsersModel-> All();
 
         $this->call->view('users/index', $data);
