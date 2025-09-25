@@ -61,6 +61,9 @@
   <div class="text-center py-8">
     <h1 class="text-4xl font-bold text-pink-600 mb-4">🌈 Cute User Directory 🌈</h1>
     <img src="https://media.giphy.com/media/3o7TKz9bX9Z8LxQ8q8/giphy.gif" alt="Cute animation" class="mx-auto rounded-full w-32 h-32 cute-shadow">
+    <div class="mt-4">
+      <a href="<?=site_url('logout')?>" class="cute-button px-6 py-2 inline-block">🚪 Logout</a>
+    </div>
   </div>
 
   <!-- Main Content -->

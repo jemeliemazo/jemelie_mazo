@@ -605,7 +605,7 @@ class Form_validation {
         }
         if($this->value < $min)
         {
-            $$this->set_error_message($custom_error, self::$err_greater_than, $min);
+            $this->set_error_message($custom_error, self::$err_greater_than, $min);
         }
         return $this;
     }
@@ -625,7 +625,7 @@ class Form_validation {
         }
         if($this->value <= $min)
         {
-            $$this->set_error_message($custom_error, self::$err_greater_than_equal_to, $min);
+            $this->set_error_message($custom_error, self::$err_greater_than_equal_to, $min);
         }
         return $this;
     }
